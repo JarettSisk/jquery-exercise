@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Rating App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="" id="movie-form">
+        <input type="text" name="movieNameInput" id="movie-name-input" placeholder="Name of movie">
+        <input type="range" name="movieRatingInput" id="movie-rating-input" min="0" max="10">
+        <span>Movie Rating:</span>
+        <span id="rating"></span>
+        <button type="submit" id="submit-button">Submit</button>
+    </form>
+    <div class="movies-container">
+        <ul class="movies">
+            <li class="movie"><p class="name-of-movie">name of movie</p><span class="movie-rating">5</span> <button class="delete-button">X</button></li>
+        </ul>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        let slider = $("#movie-rating-input");
+        let output = $("#rating");
+        output.text(slider.val()) // Display the default slider value
+
+        // Update the current slider value (each time you drag the slider handle)
+        slider.on("input", function () {
+            output.text(slider.val())
+        })
+
+        $("#submit-button").click(function (event) {
+            event.preventDefault();
+            // If no input, alert.
+            if(!$("#movie-name-input").val()) {
+                return alert("Please enter the name of a movie!");
+            }
+            // Append the new movie.
+            $(".movies").append(`<li class="movie"><p class="name-of-movie">${$("#movie-name-input").val()}</p><span class="movie-rating">${$("#movie-rating-input").val()}</span> <button class="delete-button">X</button></li>`);
+            // Clear the input and reset slider
+            $("#movie-name-input").val("");
+            slider.val(5);
+            output.text(slider.val())
+        })
+
+        // Event listener for delete button
+        $(".movies-container").on("click", ".delete-button", function() {
+            $(this).parent().remove();
+        })
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+.movies p {
+    display: inline;
+}
+
+.movies span {
+    padding: 8px;
+}
+
+.movie {
+    margin: 10px;
+}
